@@ -114,9 +114,11 @@ h2 .l{color:#9a8f7a;font-weight:500;font-size:14px;letter-spacing:.06em}
 .cell .h{display:block;font-family:"caoshu",serif;font-size:40px;line-height:1.2;color:#221b12}
 .cell .c{display:block;font-size:11px;color:#9a8f7a;
   font-family:"Songti TC","PMingLiU",serif;letter-spacing:.02em;margin-top:2px}
-#top{position:fixed;right:16px;bottom:16px;z-index:100;background:#221b12;color:#fbf9f3;
-  text-decoration:none;padding:9px 13px;border-radius:999px;font-size:13px}
-#top:hover{background:#b23a2e}
+#pager{position:fixed;right:16px;bottom:16px;z-index:100;display:flex;flex-direction:column;gap:6px}
+#pager a{display:flex;align-items:center;justify-content:center;width:34px;height:34px;
+  background:#221b12;color:#fbf9f3;text-decoration:none;border-radius:8px;font-size:15px;
+  line-height:1;user-select:none}
+#pager a:hover{background:#b23a2e}
 /* font download mask */
 #mask{position:fixed;inset:0;z-index:999;background:#fbf9f3;display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:18px;transition:opacity .3s}
@@ -136,7 +138,8 @@ h2 .l{color:#9a8f7a;font-weight:500;font-size:14px;letter-spacing:.06em}
   .cell{padding:5px 1px 4px;border-radius:5px}
   .cell .h{font-size:29px}
   .cell .c{font-size:10px}
-  #top{right:12px;bottom:12px;padding:8px 11px;font-size:12px}
+  #pager{right:10px;bottom:10px;gap:5px}
+  #pager a{width:30px;height:30px;font-size:13px}
 }
 """
 
@@ -172,6 +175,24 @@ js = """
     return go();
   }).catch(fallback);
 })();
+(function(){
+  var secs=Array.prototype.slice.call(document.querySelectorAll('main > section'));
+  if(!secs.length)return;
+  function go(i){if(i<0)i=0;if(i>=secs.length)i=secs.length-1;secs[i].scrollIntoView({block:'start'});}
+  function cur(){
+    var y=window.scrollY+70;
+    for(var i=0;i<secs.length;i++){
+      var t=secs[i].getBoundingClientRect().top+window.scrollY;
+      if(t>y)return Math.max(0,i-1);
+    }
+    return secs.length-1;
+  }
+  function on(id,fn){var el=document.getElementById(id);if(el)el.addEventListener('click',function(e){e.preventDefault();fn();});}
+  on('pg-top',function(){go(0);});
+  on('pg-prev',function(){go(cur()-1);});
+  on('pg-next',function(){go(cur()+1);});
+  on('pg-last',function(){go(secs.length-1);});
+})();
 """
 
 # ---- HTML ----
@@ -195,7 +216,12 @@ html = f"""<!doctype html>
 <main>
 {sections_all}
 </main>
-<a id="top" href="#">↑ Top</a>
+<nav id="pager" aria-label="Section navigation">
+  <a href="#" id="pg-top" title="First (top)">⏫</a>
+  <a href="#" id="pg-prev" title="Previous section">▲</a>
+  <a href="#" id="pg-next" title="Next section">▼</a>
+  <a href="#" id="pg-last" title="Last (bottom)">⏬</a>
+</nav>
 <script>{js}</script>
 </body>
 </html>
