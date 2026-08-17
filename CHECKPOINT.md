@@ -2,7 +2,7 @@
 
 > 建立時間：2026-08-17
 > 工作空間：`D:\Downloads\tsao260817\ct`
-> 狀態：**內容與頁面已完成；本次設計變更（v5：極簡平鋪列表＋字型進度遮罩）已實作，尚未上傳 GitHub Pages**（待使用者確認後釋出）
+> 狀態：**已釋出至 GitHub Pages：https://sujmao.github.io/tsao/**（v5 極簡平鋪列表＋字型進度遮罩＋README 引導連結）
 
 ## 一、專案目標
 
@@ -89,16 +89,15 @@
 3. **字型進度遮罩（v5）**：開啟即顯示全螢幕遮罩（草＋細進度條＋百分比）；用 `fetch()` 下載字型算真實 bytes 進度，完成後以 CSS Font Loading API（`new FontFace`＋`document.fonts.add`）掛上、淡出遮罩。無 `@font-face`／`preload`（避免重複下載）；無 JS 時以 `<noscript>` 隱藏遮罩、系統襯線兜底。
 4. **極簡 JS**：全頁僅此一段（約 0.9 KB），其餘零 JS。
 5. **速度與行動版**：`content-visibility: auto` 跳過屏外渲染、`@media (max-width:640px)` 適配、回頂部按鈕。
+6. **README 引導連結**：頁首副標下置一連結「閱讀專案說明（README）→」，指向 `https://github.com/sujmao/tsao`（該處渲染 README.md）。
 
-## 六、待辦（釋出階段）
+## 六、釋出（已完成）
 
-> ⚠️ 尚未執行，待使用者確認後進行。
-
-1. 初始化 git repo（`git init -b main`）。
-2. `git add -A` + commit（`.gitignore` 已排除 `__pycache__/`、`*.pyc`、`backup/`、`report.txt`）。
-3. `gh repo create tsao --public --source . --push`（repo 名稱預設 `tsao`、公開；已登入帳號 `sujmao`）。
-4. 啟用 GitHub Pages（main 分支根目錄）。
-5. 回報網址：`https://sujmao.github.io/tsao/`。
+1. ✅ `git init -b main`。
+2. ✅ `git add -A` + commit（`.gitignore` 已排除 `__pycache__/`、`*.pyc`、`backup/`、`report.txt`）。
+3. ✅ `gh repo create tsao --public --source . --push`（repo `sujmao/tsao`、公開）。
+4. ✅ 啟用 GitHub Pages（main 分支根目錄）。
+5. ✅ 網址：`https://sujmao.github.io/tsao/`；repo：`https://github.com/sujmao/tsao`。
 
 ## 七、資料來源
 
