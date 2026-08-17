@@ -176,22 +176,12 @@ js = """
   }).catch(fallback);
 })();
 (function(){
-  var secs=Array.prototype.slice.call(document.querySelectorAll('main > section'));
-  if(!secs.length)return;
-  function go(i){if(i<0)i=0;if(i>=secs.length)i=secs.length-1;secs[i].scrollIntoView({block:'start'});}
-  function cur(){
-    var y=window.scrollY+70;
-    for(var i=0;i<secs.length;i++){
-      var t=secs[i].getBoundingClientRect().top+window.scrollY;
-      if(t>y)return Math.max(0,i-1);
-    }
-    return secs.length-1;
-  }
   function on(id,fn){var el=document.getElementById(id);if(el)el.addEventListener('click',function(e){e.preventDefault();fn();});}
-  on('pg-top',function(){go(0);});
-  on('pg-prev',function(){go(cur()-1);});
-  on('pg-next',function(){go(cur()+1);});
-  on('pg-last',function(){go(secs.length-1);});
+  function vh(){return window.innerHeight||document.documentElement.clientHeight;}
+  on('pg-top',function(){window.scrollTo(0,0);});
+  on('pg-prev',function(){window.scrollBy(0,-vh());});
+  on('pg-next',function(){window.scrollBy(0,vh());});
+  on('pg-last',function(){window.scrollTo(0,document.documentElement.scrollHeight);});
 })();
 """
 
@@ -216,11 +206,11 @@ html = f"""<!doctype html>
 <main>
 {sections_all}
 </main>
-<nav id="pager" aria-label="Section navigation">
-  <a href="#" id="pg-top" title="First (top)">⏫</a>
-  <a href="#" id="pg-prev" title="Previous section">▲</a>
-  <a href="#" id="pg-next" title="Next section">▼</a>
-  <a href="#" id="pg-last" title="Last (bottom)">⏬</a>
+<nav id="pager" aria-label="Page navigation">
+  <a href="#" id="pg-top" title="Top">⏫</a>
+  <a href="#" id="pg-prev" title="Previous page">▲</a>
+  <a href="#" id="pg-next" title="Next page">▼</a>
+  <a href="#" id="pg-last" title="Bottom">⏬</a>
 </nav>
 <script>{js}</script>
 </body>
