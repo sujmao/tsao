@@ -81,13 +81,11 @@ sections_html = []
 for L, cells in groups:
     body = "".join(cell_html(ch, code) for ch, code in cells)
     sections_html.append(
-        f'<section id="{esc(L)}"><h2><span class="r">{esc(CJ.get(L, L))}</span>'
-        f'<span class="l">{esc(L)} · {len(cells)}</span></h2>'
+        f'<section id="{esc(L)}"><h2><span class="l">{esc(L)} · {len(cells)}</span></h2>'
         f'<div class="grid">{body}</div></section>')
 
 extras_body = "".join(cell_html(ch, None) for ch in extras)
-extras_html = (f'<section id="extras"><h2><span class="r">補遺</span>'
-               f'<span class="l">字型有 · 碼錶無碼 · {len(extras)}</span></h2>'
+extras_html = (f'<section id="extras"><h2><span class="l">Extras · in font, no code · {len(extras)}</span></h2>'
                f'<div class="grid">{extras_body}</div></section>')
 
 sections_all = "\n".join(sections_html) + "\n" + extras_html
@@ -109,8 +107,7 @@ main{max-width:1240px;margin:0 auto;padding:0 14px 70px}
 section{content-visibility:auto;contain-intrinsic-size:auto 600px}
 h2{margin:16px 0 8px;padding:7px 12px;font-size:17px;font-weight:500;
   background:#fbf9f3;border-bottom:1px solid #e7dfcd;letter-spacing:.05em}
-h2 .r{margin-right:8px;color:#b23a2e}
-h2 .l{color:#9a8f7a;font-weight:400;font-size:13px}
+h2 .l{color:#9a8f7a;font-weight:500;font-size:14px;letter-spacing:.06em}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:8px}
 .cell{background:#fff;border:1px solid #ece5d3;border-radius:6px;
   padding:7px 2px 5px;text-align:center}
@@ -120,7 +117,7 @@ h2 .l{color:#9a8f7a;font-weight:400;font-size:13px}
 #top{position:fixed;right:16px;bottom:16px;z-index:100;background:#221b12;color:#fbf9f3;
   text-decoration:none;padding:9px 13px;border-radius:999px;font-size:13px}
 #top:hover{background:#b23a2e}
-/* 字型下載遮罩 */
+/* font download mask */
 #mask{position:fixed;inset:0;z-index:999;background:#fbf9f3;display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:18px;transition:opacity .3s}
 #mask .brand{font-size:60px;color:#b23a2e;font-family:"Songti TC","PMingLiU",serif}
@@ -152,14 +149,14 @@ js = """
     var s=document.createElement('style');
     s.textContent='@font-face{font-family:"caoshu";src:url("caoshu.woff2") format("woff2");font-display:swap}';
     document.head.appendChild(s);
-    f.classList.add('indet');p.textContent='載入中';
+    f.classList.add('indet');p.textContent='Loading…';
     var pr=(document.fonts&&document.fonts.load)?document.fonts.load('40px "caoshu"','草'):Promise.resolve();
     pr.then(hide,hide);
   }
   fetch('caoshu.woff2').then(function(r){
     if(!r.ok) throw new Error(r.status);
     var t=+r.headers.get('Content-Length')||0,n=0,c=[],rd=r.body.getReader();
-    if(!t){f.classList.add('indet');p.textContent='載入中';}
+    if(!t){f.classList.add('indet');p.textContent='Loading…';}
     function go(){return rd.read().then(function(x){
       if(x.done){
         return new Blob(c).arrayBuffer().then(function(ab){
@@ -179,26 +176,26 @@ js = """
 
 # ---- HTML ----
 html = f"""<!doctype html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>tsao — 草書字型全漢字</title>
-<meta name="description" content="草書字型（孫過庭書風）收錄的全部 {total_hanzi} 個漢字，依倉頡碼順序平鋪列表。">
+<title>tsao — Cursive Font · All Hanzi</title>
+<meta name="description" content="All {total_hanzi} hanzi in the cursive font (Sun Guoting style), in Cangjie code order.">
 <style>{css}</style>
 </head>
 <body>
-<div id="mask"><div class="brand">草</div><div class="bar"><i id="fill"></i></div><div id="pct">0%</div></div>
+<div id="mask"><div class="brand">tsao</div><div class="bar"><i id="fill"></i></div><div id="pct">0%</div></div>
 <noscript><style>#mask{{display:none}}</style></noscript>
 <header>
   <h1>tsao</h1>
-  <p class="sub">草書字型全漢字一覽 · 共 {total_hanzi} 字 · 依倉頡碼排序（瀏覽器 Ctrl+F 即可搜尋）</p>
-  <p class="readme"><a href="https://github.com/sujmao/tsao" target="_blank" rel="noopener">閱讀專案說明（README）→</a></p>
+  <p class="sub">All {total_hanzi} hanzi in cursive · sorted by Cangjie code · search with Ctrl+F</p>
+  <p class="readme"><a href="https://github.com/sujmao/tsao" target="_blank" rel="noopener">Read the README →</a></p>
 </header>
 <main>
 {sections_all}
 </main>
-<a id="top" href="#">↑ 回頂部</a>
+<a id="top" href="#">↑ Top</a>
 <script>{js}</script>
 </body>
 </html>
