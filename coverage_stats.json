@@ -1,0 +1,23 @@
+{
+  "tw_common": {
+    "label": "臺灣常用字(甲表)",
+    "total": 4808,
+    "covered": 4798,
+    "rate": 0.9979201331114809,
+    "missing": 10
+  },
+  "tw_less_common": {
+    "label": "臺灣次常用字(乙表)",
+    "total": 6334,
+    "covered": 6114,
+    "rate": 0.9652668140195769,
+    "missing": 220
+  },
+  "hk_common": {
+    "label": "香港常用字字形表",
+    "total": 4825,
+    "covered": 4802,
+    "rate": 0.9952331606217617,
+    "missing": 23
+  }
+}

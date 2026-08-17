@@ -1,0 +1,25 @@
+**原版（繁體中文，僅支援繁體，需切換輸入法）相關 URL 整理**
+
+### 證明資訊來源（作者 mikhailcai、模仿孫過庭、免費放棄版權）
+- https://pptland.com/font/info/545  
+  （最直接描述：「字體吧（百度貼吧）網友mikhailcai製作的一款模仿孫過庭的狂草字體…17000多個字…作者已放棄版權」並標註「草書.zip (4.50MB)」）
+
+- https://www.maoken.com/freefonts/10811.html  
+  （詳細說明原版繁體、作者 mikhailcai、孫過庭來源、免費商用聲明）
+
+- https://font.jz52.com/freefont/994.html  
+  （確認貼吧 mikhailcai 製作、免費無版權，附雲端下載）
+
+- https://www.maoken.com/all-fonts  
+  （列表中標註 mikhailcai 的「草书」，明確繁體支援 ★★★★★）
+
+- https://www.100font.com/thread-427.htm  
+  （簡述貼吧 mikhailcai 製作、免費無版權）
+
+### 原版下載頁面（繁體版，非衍生版）
+- https://pptland.com/font/info/545 （直接提供「草書.zip」下載）
+- https://www.maoken.com/freefonts/10811.html （原版下載入口，作者 mikhailcai）
+- https://font.jz52.com/freefont/994.html （附百度網盤 + 天翼雲盤下載，提取碼：c1id / 29lm）
+- https://font.nuanque.com/fanti/1630.html （原版繁體草書下載）
+
+這些連結均指向**原版繁體「草書」**（非简入繁出衍生版），檔案多為 4.5MB 左右的 .zip，安裝後字體名稱顯示為「草書」。
