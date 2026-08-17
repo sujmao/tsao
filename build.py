@@ -3,7 +3,7 @@
 
 單一靜態 HTML：
 - 全部漢字依倉頡碼順序平鋪成列表（26 個字母分節 + 補遺）
-- 每字以草書字型呈現，下方以字根漢字標註其倉頡碼
+- 每字以草書字型呈現，下方以字母標註其倉頡碼
 - 搜尋交給瀏覽器內建 Ctrl+F
 - 唯一瓶頸（2.25 MB 字型檔）以全螢幕遮罩 + fetch 真實進度條呈現：
   - 拔掉 @font-face/preload，改用 fetch() 下載（可算 bytes 進度）
@@ -74,7 +74,7 @@ for ch, code in items:
 def cell_html(ch, code):
     if code:
         return (f'<div class="cell"><span class="h">{esc(ch)}</span>'
-                f'<span class="c">{esc(cj_display(code))}</span></div>')
+                f'<span class="c">{esc(code)}</span></div>')
     return f'<div class="cell"><span class="h">{esc(ch)}</span></div>'
 
 sections_html = []
@@ -217,7 +217,7 @@ readme = f"""# tsao — 草書字型全漢字部落格
 
 - 字型：**草書**（草书.ttf），由字體吧（百度貼吧）網友 **mikhailcai** 製作，模仿**孫過庭**狂草書風，約 17,000 餘字，作者已**放棄版權**、可免費商用。
 - 碼錶：**倉頡五代單字碼表**（cangjie5.dict.yaml，GPL），作為排序依據。
-- 展示方式：單一靜態 HTML。全部漢字依倉頡碼字母順序平鋪成列表（每字以草書呈現，下方以字根漢字標註其倉頡碼）；無自訂搜尋，直接使用瀏覽器內建 Ctrl+F。
+- 展示方式：單一靜態 HTML。全部漢字依倉頡碼字母順序平鋪成列表（每字以草書呈現，下方以字母標註其倉頡碼）；無自訂搜尋，直接使用瀏覽器內建 Ctrl+F。
 - 載入體驗：頁面開啟即顯示**全螢幕遮罩 + 真實下載進度**——用 `fetch()` 下載字型（約 2.25 MB）並計算進度，完成後以 CSS Font Loading API 掛上草書字型、淡出遮罩。全程僅一段極簡 JS；無 JS 時以系統襯線兜底。`content-visibility` 跳過屏外渲染、支援行動版。
 
 ## 覆蓋率
